@@ -67,3 +67,21 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+/**
+ * Given a function fn and a time in milliseconds delay, returns a debounced version of that function.
+ * 
+ * A debounced function is a function whose execution is delayed by some time and whose execution is cancelled if it is called again within that window of time.
+ * 
+ * For example, let's say delay = 50ms, and the function was called at 30ms, 60ms, and 100ms. The first 2 function calls would be cancelled, and the 3rd function call would be executed at 150ms. If instead delay = 35ms, The 1st call would be cancelled, the 2nd would be executed at 95ms, and the 3rd would be executed at 135ms.
+ * @param fn Callback function
+ * @param delay Time in milliseconds
+ * @returns Debounced version of the callback function
+ */
+export const debounce = (fn: Function, delay: number) => {
+  let timer: number;
+  return function(...args: any) {
+    clearTimeout(timer);
+    timer = setTimeout(fn, delay, ...args);
+  }
+}
